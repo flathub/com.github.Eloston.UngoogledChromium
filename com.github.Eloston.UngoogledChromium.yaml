@@ -143,7 +143,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 86.0.4240.111-1
+        tag: 86.0.4240.183-1
 
   - name: chromium
     buildsystem: simple
@@ -216,8 +216,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-86.0.4240.111.tar.xz
-        sha256: f27bdb02ebf3c48abe054c73f1ae57e22a22535ea34f5edf8693ab8432a7c717
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-86.0.4240.183.tar.xz
+        sha256: aa12c6665c33275f3edffb6f127f97f84fa0bb69c644b4b023d51d2d058a69bc
       # note: don't use dead reloc patch...
       #       ungoogled-chromium patches that file causing conflicts!
       - type: patch
