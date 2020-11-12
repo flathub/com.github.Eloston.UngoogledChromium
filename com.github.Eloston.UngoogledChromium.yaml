@@ -143,7 +143,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 86.0.4240.183-1
+        tag: 86.0.4240.193-1
 
   - name: chromium
     buildsystem: simple
