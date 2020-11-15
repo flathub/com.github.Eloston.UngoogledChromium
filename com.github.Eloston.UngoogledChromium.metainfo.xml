@@ -29,6 +29,7 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="86.0.4240.198" date="2020-11-15"/>
     <release version="86.0.4240.193" date="2020-11-11"/>
     <release version="85.0.4183.121" date="2020-09-28"/>
   </releases>
