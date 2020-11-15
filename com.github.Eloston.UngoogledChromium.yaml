@@ -14,10 +14,10 @@ finish-args:
   - --socket=pulseaudio
   - --socket=x11
   - --system-talk-name=org.freedesktop.Avahi
+  - --system-talk-name=org.freedesktop.UPower
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
-  - --talk-name=org.freedesktop.UPower
   - --talk-name=org.gnome.SessionManager
   - --own-name=org.mpris.MediaPlayer2.chromium.*
 
@@ -131,10 +131,17 @@ modules:
       - type: file
         path: krb5.conf
 
+  - name: flextop
+    buildsystem: meson
+    sources:
+      - type: git
+        url: https://github.com/refi64/flextop
+        commit: 3d3f8fe389ad7f5e37bea6b424e1ec8d146eeb54
+
   - name: extensions
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/native-messaging-hosts /app/widevine
+      - mkdir -p /app/native-messaging-hosts /app/policies /app/widevine
 
   - name: ungoogled-chromium
     buildsystem: simple
@@ -143,7 +150,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 86.0.4240.183-1
+        tag: 86.0.4240.198-1
 
   - name: chromium
     buildsystem: simple
@@ -216,8 +223,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-86.0.4240.183.tar.xz
-        sha256: aa12c6665c33275f3edffb6f127f97f84fa0bb69c644b4b023d51d2d058a69bc
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-86.0.4240.198.tar.xz
+        sha256: a0ab825e527becab4ab3e11ef889e842436fe11a4fb7874419d1970e680c7a44
       # note: don't use dead reloc patch...
       #       ungoogled-chromium patches that file causing conflicts!
       - type: patch
@@ -239,6 +246,10 @@ modules:
           - patches/0015-ffmpeg-Don-t-lie-about-AAC-and-H264-decoders-when-no.patch
           - patches/0016-XDG-file-chooser-portal-support.patch
           - patches/0018-XProto-Search-for-cursors-in-the-XDG-data-dirs.patch
+          - patches/0019-Remove-the-ability-to-create-desktop-shortcuts.patch
+          - patches/0020-webhid-Use-a-stub-where-there-is-no-OS-support.patch
+          - patches/0021-webusb-Don-t-reinitialize-a-failed-connection.patch
+          - patches/0022-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
