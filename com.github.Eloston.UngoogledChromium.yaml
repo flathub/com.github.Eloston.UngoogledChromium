@@ -5,7 +5,7 @@ sdk: org.freedesktop.Sdk
 command: chromium
 finish-args:
   - --require-version=1.8.2
-  - --filesystem=xdg-download
+  - --filesystem=home
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
   - --share=ipc
@@ -36,10 +36,26 @@ add-extensions:
     no-autodownload: true
     autodelete: true
 
-  com.github.Eloston.UngoogledChromium.Policy:
+  com.github.Eloston.UngoogledChromium.Extension:
     version: '1'
-    directory: policies
+    directory: extensions
     merge-dirs: manifest
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+
+  com.github.Eloston.UngoogledChromium.Policy.Managed:
+    version: '1'
+    directory: policies/managed
+    merge-dirs: policy
+    subdirectories: true
+    no-autodownload: true
+    autodelete: true
+
+  com.github.Eloston.UngoogledChromium.Policy.Recommended:
+    version: '1'
+    directory: policies/recommended
+    merge-dirs: policy
     subdirectories: true
     no-autodownload: true
     autodelete: true
@@ -141,7 +157,11 @@ modules:
   - name: extensions
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/native-messaging-hosts /app/policies /app/widevine
+      - >
+        mkdir -p
+        /app/extensions
+        /app/native-messaging-hosts
+        /app/policies/{managed,recommended}
 
   - name: ungoogled-chromium
     buildsystem: simple
@@ -163,7 +183,6 @@ modules:
         CFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
         CXXFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
     build-commands:
-      # Refer to https://github.com/Eloston/ungoogled-chromium/blob/master/docs/building.md
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
@@ -188,9 +207,8 @@ modules:
         is_component_ffmpeg=true
         use_vaapi=true
         enable_widevine=true
+        chrome_pgo_phase=0
         ' >> out/Release/args.gn
-      - mkdir -p third_party/node/linux/node-linux-x64/bin/
-      - ln -sf /usr/lib/sdk/node12/bin/node third_party/node/linux/node-linux-x64/bin/
       - tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles
       - mkdir -p out/ReleaseFree
       - cp out/Release{,Free}/args.gn
@@ -205,10 +223,9 @@ modules:
       - mkdir -p /app/chromium
       # Keep file names sync with build_devel_flatpak.py
       - >-
-        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales; do
+        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales MEIPreload; do
           cp -rv $path /app/chromium;
         done
-      - install -Dm755 -t /app/chromium/swiftshader out/Release/swiftshader/*.so
       # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
       - install -Dm 755 out/ReleaseFree/libffmpeg.so /app/chromium/libffmpeg.so
       - install -Dm 755 out/Release/libffmpeg.so /app/chromium/nonfree-codecs/lib/libffmpeg.so
