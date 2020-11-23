@@ -264,7 +264,6 @@ modules:
           - patches/0018-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
           - patches/0019-Add-support-for-the-XDG-file-chooser-portal.patch
           - patches/0020-Add-OpenURI-portal-support-for-opening-directories.patch
-          - patches/0021-Remove-references-to-enable-dse-memoryssa.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
