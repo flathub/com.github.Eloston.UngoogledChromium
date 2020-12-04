@@ -1,8 +1,8 @@
 # ungoogled-chromium flatpak
 
 ## How do I install Widevine CDM?
-
-1. Download and execute [https://github.com/flathub/com.github.Eloston.UngoogledChromium/raw/beta/widevine-install.sh](widevine-install.sh)
+	
+1. Download and execute [widevine-install.sh](https://github.com/flathub/com.github.Eloston.UngoogledChromium/raw/beta/widevine-install.sh)
 2. Restart the browser
 
 ## How do I fix the spell checker?
