@@ -6,8 +6,10 @@ command: chromium
 finish-args:
   - --require-version=1.8.2
   - --filesystem=home
+  - --filesystem=xdg-run/pipewire-0
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
+  - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
   - --share=ipc
   - --share=network
   - --socket=cups
@@ -31,32 +33,24 @@ add-extensions:
 
   com.github.Eloston.UngoogledChromium.NativeMessagingHost:
     version: '1'
-    directory: native-messaging-hosts
-    merge-dirs: manifest
+    directory: chromium/native-messaging-hosts
+    merge-dirs: native-messaging-hosts
     subdirectories: true
     no-autodownload: true
     autodelete: true
 
   com.github.Eloston.UngoogledChromium.Extension:
     version: '1'
-    directory: extensions
-    merge-dirs: manifest
+    directory: chromium/extensions
+    merge-dirs: extensions
     subdirectories: true
     no-autodownload: true
     autodelete: true
 
-  com.github.Eloston.UngoogledChromium.Policy.Managed:
+  com.github.Eloston.UngoogledChromium.Policy:
     version: '1'
-    directory: policies/managed
-    merge-dirs: policy
-    subdirectories: true
-    no-autodownload: true
-    autodelete: true
-
-  com.github.Eloston.UngoogledChromium.Policy.Recommended:
-    version: '1'
-    directory: policies/recommended
-    merge-dirs: policy
+    directory: chromium/policies
+    merge-dirs: policies/managed;policies/recommended
     subdirectories: true
     no-autodownload: true
     autodelete: true
@@ -153,7 +147,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/refi64/flextop
-        commit: 3d3f8fe389ad7f5e37bea6b424e1ec8d146eeb54
+        commit: b8ca6d9952a9f5d40df99903448c3fa7ccea80ee
 
   - name: extensions
     buildsystem: simple
@@ -171,7 +165,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 87.0.4280.67-1
+        tag: 87.0.4280.88-1
 
   - name: chromium
     buildsystem: simple
@@ -241,8 +235,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-87.0.4280.67.tar.xz
-        sha256: 42c530cc59a44db465b333f3b8daca5afd4d5f51205fa8d7d3f79410311abbf0
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-87.0.4280.88.tar.xz
+        sha256: 3e4645328735ef60db78d1a313efb3770a3edeaede90d076414df52f567a09c0
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -265,6 +259,7 @@ modules:
           - patches/0018-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
           - patches/0019-Add-support-for-the-XDG-file-chooser-portal.patch
           - patches/0020-Add-OpenURI-portal-support-for-opening-directories.patch
+          - patches/0022-Enable-new-dtags-on-non-component-builds.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
