@@ -7,11 +7,10 @@ _widevine_ver="$(wget -qO- https://dl.google.com/widevine-cdm/versions.txt | tai
 _mktemp_dir="$(mktemp -d)"
 cd "$_mktemp_dir"
 
-# Use the architecture of the current machine or whatever the user has set
-# externally
-ARCH="${ARCH:-$(uname -m)}"
+# Use the architecture of the current machine
+ARCH="$(uname -m)"
 case "$ARCH" in
-  x86_64) WIDEVINE_ARCH="x64"; CHROMIUM_ARCH="x64" ;;
+  x86_64) WIDEVINE_ARCH="x64";  CHROMIUM_ARCH="x64" ;;
     i?86) WIDEVINE_ARCH="ia32"; CHROMIUM_ARCH="x86" ;;
        *) echo "The architecture $ARCH is not supported." >&2 ; exit 1 ;;
 esac
