@@ -165,7 +165,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 87.0.4280.88-1
+        tag: 87.0.4280.141-1
 
   - name: chromium
     buildsystem: simple
@@ -235,8 +235,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-87.0.4280.88.tar.xz
-        sha256: 3e4645328735ef60db78d1a313efb3770a3edeaede90d076414df52f567a09c0
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-87.0.4280.141.tar.xz
+        sha256: 147591d7fc21e1a173701d28bbf35baddb91e64dd96ec16d8eee9a5113403375
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -260,6 +260,7 @@ modules:
           - patches/0019-Add-support-for-the-XDG-file-chooser-portal.patch
           - patches/0020-Add-OpenURI-portal-support-for-opening-directories.patch
           - patches/0022-Enable-new-dtags-on-non-component-builds.patch
+          - patches/0023-Add-support-for-respecting-system-proxy-settings-whe.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
