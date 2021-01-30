@@ -7,6 +7,7 @@ finish-args:
   - --require-version=1.8.2
   - --filesystem=home
   - --filesystem=xdg-run/pipewire-0
+  - --filesystem=/run/.heim_org.h5l.kcm-socket
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
   - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
@@ -88,7 +89,7 @@ modules:
   - name: gtk-settings
     buildsystem: simple
     build-commands:
-      - 'install -Dm 644 gtk-settings.ini /app/etc/xdg/gtk-3.0/settings.ini'
+      - install -Dm 644 gtk-settings.ini /app/etc/xdg/gtk-3.0/settings.ini
     sources:
       - type: file
         path: gtk-settings.ini
@@ -147,16 +148,23 @@ modules:
     sources:
       - type: git
         url: https://github.com/refi64/flextop
-        commit: b8ca6d9952a9f5d40df99903448c3fa7ccea80ee
+        commit: 485c332c7ec36a8b74be8f3622fc756ac6263f40
 
   - name: extensions
     buildsystem: simple
     build-commands:
-      - >
-        mkdir -p
-        /app/extensions
-        /app/native-messaging-hosts
-        /app/policies/{managed,recommended}
+      - mkdir -p /app/chromium/{extensions,native-messaging-hosts,policies}
+
+  - name: pipewire
+    buildsystem: meson
+    config-opts:
+      - -Dgstreamer=disabled
+      - -Dman=false
+      - -Dsystemd=false
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/pipewire/pipewire.git
+        tag: 0.2.7
 
   - name: ungoogled-chromium
     buildsystem: simple
@@ -165,7 +173,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 87.0.4280.141-1
+        tag: 88.0.4324.104-1
 
   - name: chromium
     buildsystem: simple
@@ -203,6 +211,8 @@ modules:
         use_vaapi=true
         enable_widevine=true
         chrome_pgo_phase=0
+        rtc_use_pipewire=true
+        enable_hangout_services_extension=true
         ' >> out/Release/args.gn
       - tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles
       - mkdir -p out/ReleaseFree
@@ -235,32 +245,32 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-87.0.4280.141.tar.xz
-        sha256: 147591d7fc21e1a173701d28bbf35baddb91e64dd96ec16d8eee9a5113403375
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-88.0.4324.104.tar.xz
+        sha256: 7dbdda0df8955811ada33a9505cad2f2e17f007827c435b591ba571c5dcd0147
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
           - patches/0002-ffmpeg-Handle-transient-decode-errors-arising-from-l.patch
-          - patches/0003-ffmpeg-Enable-support-for-using-OpenH264-for-H264-pl.patch
-          - patches/0004-Use-system-wide-node.patch
-          - patches/0005-Ensure-libffmpeg.so-is-in-the-rpath-of-binaries.patch
-          - patches/0006-flatpak-Add-initial-sandbox-support.patch
-          - patches/0007-flatpak-Expose-Widevine-into-the-sandbox.patch
-          - patches/0008-flatpak-Adjust-paths-for-the-sandbox.patch
-          - patches/0009-Import-chromium-71.0.3578.98-widevine-r3.patch.patch
-          - patches/0010-Enable-Chromecast-by-default.patch
-          - patches/0011-x11-Set-_NET_WM_BYPASS_COMPOSITOR-for-fullscreen.patch
-          - patches/0012-memory-Enable-the-tab-discards-feature.patch
-          - patches/0013-Enable-VAVDA-VAVEA-and-VAJDA-on-linux-with-VAAPI-onl.patch
-          - patches/0014-ffmpeg-Don-t-lie-about-AAC-and-H264-decoders-when-no.patch
-          - patches/0015-Remove-the-ability-to-create-desktop-shortcuts.patch
-          - patches/0016-webhid-Properly-handle-lack-of-platform-support.patch
-          - patches/0017-webusb-Properly-handle-lack-of-platform-support.patch
-          - patches/0018-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
-          - patches/0019-Add-support-for-the-XDG-file-chooser-portal.patch
-          - patches/0020-Add-OpenURI-portal-support-for-opening-directories.patch
-          - patches/0022-Enable-new-dtags-on-non-component-builds.patch
-          - patches/0023-Add-support-for-respecting-system-proxy-settings-whe.patch
+          - patches/0003-Use-system-wide-node.patch
+          - patches/0004-Ensure-libffmpeg.so-is-in-the-rpath-of-binaries.patch
+          - patches/0005-flatpak-Add-initial-sandbox-support.patch
+          - patches/0006-flatpak-Expose-Widevine-into-the-sandbox.patch
+          - patches/0007-flatpak-Adjust-paths-for-the-sandbox.patch
+          - patches/0008-Import-chromium-71.0.3578.98-widevine-r3.patch.patch
+          - patches/0009-Enable-Chromecast-by-default.patch
+          - patches/0010-x11-Set-_NET_WM_BYPASS_COMPOSITOR-for-fullscreen.patch
+          - patches/0011-memory-Enable-the-tab-discards-feature.patch
+          - patches/0012-Enable-accelerated-mjpeg-decode-on-Linux.patch
+          - patches/0013-ffmpeg-Don-t-lie-about-AAC-and-H264-decoders-when-no.patch
+          - patches/0014-Remove-the-ability-to-create-desktop-shortcuts.patch
+          - patches/0015-webhid-Properly-handle-lack-of-platform-support.patch
+          - patches/0016-webusb-Properly-handle-lack-of-platform-support.patch
+          - patches/0017-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
+          - patches/0018-Add-support-for-the-XDG-file-chooser-portal.patch
+          - patches/0019-Add-OpenURI-portal-support-for-opening-directories.patch
+          - patches/0020-Remove-references-to-enable-dse-memoryssa.patch
+          - patches/0022-Add-support-for-respecting-system-proxy-settings-whe.patch
+          - patches/0023-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
