@@ -228,8 +228,8 @@ modules:
       - mkdir -p /app/chromium
       # Keep file names sync with build_devel_flatpak.py
       - >-
-        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales; do
-          cp -rv $path /app/chromium;
+        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales swiftshader; do
+          cp -rv $path /app/chromium || true
         done
       # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
       - install -Dm 755 out/ReleaseFree/libffmpeg.so /app/chromium/libffmpeg.so
