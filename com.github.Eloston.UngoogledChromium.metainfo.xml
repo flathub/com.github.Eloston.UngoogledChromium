@@ -1,5 +1,5 @@
-<!-- Copyright 2017 the Chromium authors, with modifications -->
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2017 the Chromium authors, with modifications -->
 <component type="desktop-application">
   <id>com.github.Eloston.UngoogledChromium</id>
   <launchable type="desktop-id">com.github.Eloston.UngoogledChromium.desktop</launchable>
