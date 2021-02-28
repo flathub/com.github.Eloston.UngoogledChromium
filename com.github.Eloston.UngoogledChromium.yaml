@@ -14,6 +14,8 @@ modules:
     buildsystem: simple
     build-commands:
       - install -Dm 755 chromium.sh /app/bin/chromium
+      - install -Dm 644 com.github.Eloston.UngoogledChromium.metainfo.xml -t /app/share/metainfo
+      - install -Dm 644 com.github.Eloston.UngoogledChromium.desktop -t /app/share/applications
     sources:
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
