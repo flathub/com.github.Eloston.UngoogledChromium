@@ -21,5 +21,3 @@ modules:
         path: com.github.Eloston.UngoogledChromium.metainfo.xml
       - type: file
         path: chromium.sh
-      - type: file
-        path: portal_error.txt
