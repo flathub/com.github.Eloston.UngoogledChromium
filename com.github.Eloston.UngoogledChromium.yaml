@@ -85,6 +85,7 @@ modules:
       - type: git
         url: https://gitlab.gnome.org/GNOME/gtk.git
         tag: 3.24.23
+        commit: 016e8c55ab924c9ef4d32c8cb06253b1dc1be60d
 
   - name: gtk-settings
     buildsystem: simple
@@ -165,6 +166,7 @@ modules:
       - type: git
         url: https://github.com/pipewire/pipewire.git
         tag: 0.2.7
+        commit: 14c11c0fe4d366bad4cfecdee97b6652ff9ed63d
 
   - name: ungoogled-chromium
     buildsystem: simple
@@ -277,6 +279,7 @@ modules:
           - patches/0017-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
           - patches/0018-Add-support-for-the-XDG-file-chooser-portal.patch
           - patches/0019-Add-OpenURI-portal-support-for-opening-directories.patch
+          - patches/0021-Enable-new-dtags-on-non-component-builds.patch
           - patches/0022-Add-support-for-respecting-system-proxy-settings-whe.patch
           - patches/0023-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
       - type: file
