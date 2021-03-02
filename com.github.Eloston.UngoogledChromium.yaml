@@ -169,7 +169,7 @@ modules:
   - name: ungoogled-chromium
     buildsystem: simple
     build-commands:
-      - 'cp -r $PWD /app/ugc'
+      - cp -r $PWD /app/ugc
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
@@ -193,32 +193,17 @@ modules:
     build-commands:
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
-      - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
+      - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
+        -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
       - mkdir -p out/Release
       - cp /app/ugc/flags.gn out/Release/args.gn
-      - >-
-        echo '
-        use_sysroot=false
-        custom_toolchain="//build/toolchain/linux/unbundle:default"
-        host_toolchain="//build/toolchain/linux/unbundle:default"
-        use_udev=false
-        use_lld=true
-        enable_nacl=false
-        blink_symbol_level=0
-        use_gnome_keyring=false
-        use_pulseaudio=true
-        clang_use_chrome_plugins=false
-        is_official_build=true
-        treat_warnings_as_errors=false
-        proprietary_codecs=true
-        ffmpeg_branding="Chrome"
-        is_component_ffmpeg=true
-        use_vaapi=true
-        enable_widevine=true
-        chrome_pgo_phase=0
-        rtc_use_pipewire=true
-        enable_hangout_services_extension=true
-        ' >> out/Release/args.gn
+      - echo ' use_sysroot=false custom_toolchain="//build/toolchain/linux/unbundle:default"
+        host_toolchain="//build/toolchain/linux/unbundle:default" use_udev=false use_lld=true
+        enable_nacl=false blink_symbol_level=0 use_gnome_keyring=false use_pulseaudio=true
+        clang_use_chrome_plugins=false is_official_build=true treat_warnings_as_errors=false
+        proprietary_codecs=true ffmpeg_branding="Chrome" is_component_ffmpeg=true
+        use_vaapi=true enable_widevine=true chrome_pgo_phase=0 rtc_use_pipewire=true
+        enable_hangout_services_extension=true ' >> out/Release/args.gn
       - tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles
       - mkdir -p out/ReleaseFree
       - cp out/Release{,Free}/args.gn
@@ -226,23 +211,17 @@ modules:
       - out/Release/gn gen out/Release
       - out/Release/gn gen out/ReleaseFree
       - ninja -C out/ReleaseFree -j$FLATPAK_BUILDER_N_JOBS libffmpeg.so
-      - >
-        . /usr/lib/sdk/node12/enable.sh;
-        . /usr/lib/sdk/openjdk11/enable.sh;
-        ninja -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome
+      - ". /usr/lib/sdk/node12/enable.sh; . /usr/lib/sdk/openjdk11/enable.sh; ninja\
+        \ -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome\n"
       - mkdir -p /app/chromium
       # Keep file names sync with build_devel_flatpak.py
-      - >-
-        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales swiftshader; do
-          cp -rv $path /app/chromium || true
-        done
-      # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
+      - "cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales\
+        \ swiftshader; do\n  cp -rv $path /app/chromium || true\ndone" # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
       - install -Dm 755 out/ReleaseFree/libffmpeg.so /app/chromium/libffmpeg.so
       - install -Dm 755 out/Release/libffmpeg.so /app/chromium/nonfree-codecs/lib/libffmpeg.so
-      - >-
-        for size in 24 48 64 128 256; do
-          install -Dm 644 chrome/app/theme/chromium/product_logo_$size.png /app/share/icons/hicolor/${size}x${size}/apps/com.github.Eloston.UngoogledChromium.png;
-        done
+      - "for size in 24 48 64 128 256; do\n  install -Dm 644 chrome/app/theme/chromium/product_logo_$size.png\
+        \ /app/share/icons/hicolor/${size}x${size}/apps/com.github.Eloston.UngoogledChromium.png;\n\
+        done"
       - install -Dm 644 portal_error.txt -t /app/share/flatpak-chromium
       - install -Dm 644 com.github.Eloston.UngoogledChromium.desktop -t /app/share/applications
       - install -Dm 644 com.github.Eloston.UngoogledChromium.metainfo.xml -t /app/share/metainfo
@@ -250,8 +229,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-88.0.4324.182.tar.xz
-        sha256: 30411fc3ec2d33df4c5cad41f21affa3823c80f7dbd394f6d68f9a1e81015b81
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-89.0.4389.72.tar.xz
+        sha256: 946a0b65aad10e0f77a539103892099b7238310c733f25b41d58b76f6ac0bc4f
         x-checker-data:
           type: anitya
           project-id: 13344

@@ -29,18 +29,19 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="89.0.4389.72" date="2021-03-02"/>
     <release version="88.0.4324.182" date="2021-02-19"/>
     <release version="88.0.4324.150" date="2021-02-11"/>
     <release version="88.0.4324.146" date="2021-02-03"/>
     <release version="88.0.4324.104-1" date="2021-01-30"/>
     <release version="88.0.4324.104" date="2021-01-30"/>
     <release version="87.0.4280.141" date="2021-01-07"/>
-    <release version="87.0.4280.88"  date="2020-12-04"/>
-    <release version="87.0.4280.67"  date="2020-11-23"/>
+    <release version="87.0.4280.88" date="2020-12-04"/>
+    <release version="87.0.4280.67" date="2020-11-23"/>
     <release version="86.0.4240.198" date="2020-11-15"/>
     <release version="86.0.4240.193" date="2020-11-11"/>
     <release version="85.0.4183.121" date="2020-09-28"/>
   </releases>
-  <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
   <update_contact>rany2@riseup.net</update_contact>
 </component>
