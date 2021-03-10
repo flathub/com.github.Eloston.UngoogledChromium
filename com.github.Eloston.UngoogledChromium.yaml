@@ -61,7 +61,9 @@ sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk11
 
 modules:
-  - shared-modules/libsecret/libsecret.json
+  #- shared-modules/libsecret/libsecret.json
+  # see https://github.com/flathub/org.chromium.Chromium/commit/f4f4b33d98f8950e2a4fb49c49b2468a68f3df71
+  - libsecret.json
 
   - name: libcups
     make-args: [libs]
@@ -173,8 +175,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 88.0.4324.182-1
-        commit: 27c9e9fabd38001b32d148f7b3f99b4d31e67277
+        tag: 89.0.4389.82-1
+        commit: 6f98d56618f5a191e3996031bcfffa40b5126343
 
   - name: chromium
     buildsystem: simple
@@ -246,8 +248,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-88.0.4324.182.tar.xz
-        sha256: 30411fc3ec2d33df4c5cad41f21affa3823c80f7dbd394f6d68f9a1e81015b81
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-89.0.4389.82.tar.xz
+        sha256: df4914407b68afdc6449cb8e3f1b08d110eb8689ac41f86490e337fa4d1be379
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -272,6 +274,7 @@ modules:
           - patches/0021-Enable-new-dtags-on-non-component-builds.patch
           - patches/0022-Add-support-for-respecting-system-proxy-settings-whe.patch
           - patches/0023-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
+          - patches/0024-Revert-base-Rename-SEQUENCE_CHECKER-capability-name.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
