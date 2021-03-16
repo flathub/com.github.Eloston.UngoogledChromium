@@ -175,8 +175,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 89.0.4389.82-1
-        commit: 6f98d56618f5a191e3996031bcfffa40b5126343
+        tag: 89.0.4389.90-1
+        commit: 4661173f5d2a6de633be3639e1444b2b60718857
 
   - name: chromium
     buildsystem: simple
@@ -248,8 +248,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-89.0.4389.82.tar.xz
-        sha256: df4914407b68afdc6449cb8e3f1b08d110eb8689ac41f86490e337fa4d1be379
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-89.0.4389.90.tar.xz
+        sha256: 11c6089c5fdd921216aa4eb34b52818a9b091cad655a24aed0982d29e65b279a
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
