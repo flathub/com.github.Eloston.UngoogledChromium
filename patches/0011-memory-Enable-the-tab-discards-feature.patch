@@ -1,13 +1,11 @@
-From 8ef08edffc7029d28d26bace847ac69f4d4f90fa Mon Sep 17 00:00:00 2001
+From 6cc5e26c2835126981ccdc98113aa9ca8c7c83c3 Mon Sep 17 00:00:00 2001
 From: Mario Sanchez Prada <mario@endlessm.com>
 Date: Thu, 28 Jan 2016 13:53:08 +0000
 Subject: [PATCH 11/24] memory: Enable the tab discards feature
 
 This allows manually discarding tabs from chrome://discards as well
 as automatic tab discards once a certain level of "memory pressure"
-is reached, using Endless's implementation of MemoryPressureMonitor.
-
-[endlessm/eos-shell#1331]
+is reached.
 ---
  chrome/browser/resource_coordinator/tab_manager.cc | 5 ++---
  1 file changed, 2 insertions(+), 3 deletions(-)

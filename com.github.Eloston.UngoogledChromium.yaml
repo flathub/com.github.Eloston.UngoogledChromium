@@ -43,7 +43,7 @@ add-extensions:
   com.github.Eloston.UngoogledChromium.Extension:
     version: '1'
     directory: chromium/extensions
-    merge-dirs: extensions
+    merge-dirs: extensions;native-messaging-hosts;policies/managed;policies/recommended
     subdirectories: true
     no-autodownload: true
     autodelete: true
@@ -56,9 +56,11 @@ add-extensions:
     no-autodownload: true
     autodelete: true
 
+
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node12
   - org.freedesktop.Sdk.Extension.openjdk11
+  - org.freedesktop.Sdk.Extension.llvm11
 
 modules:
   #- shared-modules/libsecret/libsecret.json
@@ -150,12 +152,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/refi64/flextop
-        commit: 485c332c7ec36a8b74be8f3622fc756ac6263f40
+        commit: 9f66dac84388f520ecab5ac4fa60df6343b7db5b
 
   - name: extensions
     buildsystem: simple
     build-commands:
       - mkdir -p /app/chromium/{extensions,native-messaging-hosts,policies}
+      - for dir in native-messaging-hosts policies; do ln -s /app/chromium/{$dir,extensions}/$dir;
+        done
+      - touch /app/chromium/extensions/no-mount-stamp
 
   - name: pipewire
     buildsystem: meson
@@ -175,8 +180,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 89.0.4389.114-1
-        commit: cceb27c481372658de3e70c91641951e30a14ca7
+        tag: 90.0.4430.85-1
+        commit: 9a1f608839eed8fdb98ca5306001111124d86eb8
 
   - name: chromium
     buildsystem: simple
@@ -215,6 +220,8 @@ modules:
         enable_widevine=true
         chrome_pgo_phase=0
         rtc_use_pipewire=true
+        rtc_link_pipewire=true
+        rtc_pipewire_version="0.3"
         enable_hangout_services_extension=true
         ' >> out/Release/args.gn
       - tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles
@@ -227,6 +234,7 @@ modules:
       - >
         . /usr/lib/sdk/node12/enable.sh;
         . /usr/lib/sdk/openjdk11/enable.sh;
+        . /usr/lib/sdk/llvm11/enable.sh;
         ninja -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome
       - mkdir -p /app/chromium
       # Keep file names sync with build_devel_flatpak.py
@@ -248,8 +256,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-89.0.4389.114.tar.xz
-        sha256: f2f0abe9697a220a8545df74d832c6c8d85a4fb11845e7e398752d746e72ed00
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-90.0.4430.85.tar.xz
+        sha256: 01c5594d4b7eaa67e00b4fa16ae0c9d35ec5917467abd387ba1b5cc332d44922
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -271,10 +279,11 @@ modules:
           - patches/0017-Use-CHROME_WRAPPER-as-the-executable-on-restart.patch
           - patches/0018-Add-support-for-the-XDG-file-chooser-portal.patch
           - patches/0019-Add-OpenURI-portal-support-for-opening-directories.patch
-          - patches/0021-Enable-new-dtags-on-non-component-builds.patch
-          - patches/0022-Add-support-for-respecting-system-proxy-settings-whe.patch
-          - patches/0023-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
-          - patches/0024-Revert-base-Rename-SEQUENCE_CHECKER-capability-name.patch
+          - patches/0020-Enable-new-dtags-on-non-component-builds.patch
+          - patches/0021-Add-support-for-respecting-system-proxy-settings-whe.patch
+          - patches/0022-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
+          - patches/0023-Revert-base-Rename-SEQUENCE_CHECKER-capability-name.patch
+          - patches/0024-Revert-Reland-Add-clang-nomerge-attribute-to-CheckEr.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
