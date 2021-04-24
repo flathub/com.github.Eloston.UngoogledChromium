@@ -25,6 +25,6 @@ wget -O "$widevine_zip" "https://dl.google.com/widevine-cdm/${_widevine_ver}-lin
 
 # Install WideVine from zip file into UngoogledChromium flatpak
 _install_prefix="$HOME/.var/app/com.github.Eloston.UngoogledChromium/config/chromium/WidevineCdm/${_widevine_ver}"
-unzip -p "$widevine_zip" libwidevinecdm.so | install -Dm644 "/proc/self/fd/0" "${_install_prefix}/_platform_specific/linux_$CHROMIUM_ARCH/libwidevinecdm.so"
-unzip -p "$widevine_zip" manifest.json     | install  -m644 "/proc/self/fd/0" "${_install_prefix}/manifest.json"
-unzip -p "$widevine_zip" LICENSE.txt       | install  -m644 "/proc/self/fd/0" "${_install_prefix}/LICENSE.txt"
+unzip -p "$widevine_zip" libwidevinecdm.so | install -Dm644 "/dev/stdin" "${_install_prefix}/_platform_specific/linux_$CHROMIUM_ARCH/libwidevinecdm.so"
+unzip -p "$widevine_zip" manifest.json     | install  -m644 "/dev/stdin" "${_install_prefix}/manifest.json"
+unzip -p "$widevine_zip" LICENSE.txt       | install  -m644 "/dev/stdin" "${_install_prefix}/LICENSE.txt"
