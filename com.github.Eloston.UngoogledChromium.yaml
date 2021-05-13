@@ -60,7 +60,7 @@ add-extensions:
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.node12
   - org.freedesktop.Sdk.Extension.openjdk11
-  - org.freedesktop.Sdk.Extension.llvm11
+  - org.freedesktop.Sdk.Extension.llvm12
 
 modules:
   #- shared-modules/libsecret/libsecret.json
@@ -180,8 +180,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 90.0.4430.93-1
-        commit: b2f7b0cb11f5091be0b71bbe6b57e0b46a47af35
+        tag: 90.0.4430.212-1
+        commit: 5fc5bf59f3ff7b499f3b04553bcb08ba6c8801b7
 
   - name: chromium
     buildsystem: simple
@@ -234,12 +234,12 @@ modules:
       - >
         . /usr/lib/sdk/node12/enable.sh;
         . /usr/lib/sdk/openjdk11/enable.sh;
-        . /usr/lib/sdk/llvm11/enable.sh;
+        . /usr/lib/sdk/llvm12/enable.sh;
         ninja -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome
       - mkdir -p /app/chromium
       # Keep file names sync with build_devel_flatpak.py
       - >-
-        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales swiftshader; do
+        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales MEIPreload swiftshader; do
           cp -rv $path /app/chromium || true
         done
       # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
@@ -256,8 +256,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-90.0.4430.93.tar.xz
-        sha256: 532ec75f4e08384fe2fb17b69af9210103379ee212dbf0bf081bdc5d4eca357e
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-90.0.4430.212.tar.xz
+        sha256: abe11d0cb1ff21278aad2eec1a1e279d59176b15331804d7df1807446786d59e
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -281,9 +281,6 @@ modules:
           - patches/0019-Add-OpenURI-portal-support-for-opening-directories.patch
           - patches/0020-Enable-new-dtags-on-non-component-builds.patch
           - patches/0021-Add-support-for-respecting-system-proxy-settings-whe.patch
-          - patches/0022-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
-          - patches/0023-Revert-base-Rename-SEQUENCE_CHECKER-capability-name.patch
-          - patches/0024-Revert-Reland-Add-clang-nomerge-attribute-to-CheckEr.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
