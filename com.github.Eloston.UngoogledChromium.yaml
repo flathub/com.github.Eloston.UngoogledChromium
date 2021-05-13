@@ -162,21 +162,12 @@ modules:
         done
       - touch /app/chromium/extensions/no-mount-stamp
 
-  - name: pipewire
-    buildsystem: meson
-    config-opts:
-      - -Dgstreamer=disabled
-      - -Dman=false
-      - -Dsystemd=false
-    sources:
-      - type: git
-        url: https://github.com/pipewire/pipewire.git
-        tag: 0.2.7
-
   - name: ungoogled-chromium
     buildsystem: simple
     build-commands:
       - 'cp -r $PWD /app/ugc'
+    cleanup:
+      - '*'
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
@@ -253,7 +244,6 @@ modules:
       - install -Dm 644 com.github.Eloston.UngoogledChromium.desktop -t /app/share/applications
       - install -Dm 644 com.github.Eloston.UngoogledChromium.metainfo.xml -t /app/share/metainfo
       - install -Dm 755 chromium.sh /app/bin/chromium
-      - rm -rf /app/ugc
     sources:
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-90.0.4430.212.tar.xz
