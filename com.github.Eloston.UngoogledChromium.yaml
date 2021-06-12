@@ -56,11 +56,10 @@ add-extensions:
     no-autodownload: true
     autodelete: true
 
-
 sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm12
   - org.freedesktop.Sdk.Extension.node12
   - org.freedesktop.Sdk.Extension.openjdk11
-  - org.freedesktop.Sdk.Extension.llvm11
 
 modules:
   - libsecret.json
@@ -170,8 +169,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 91.0.4472.77-1
-        commit: 6802c883c70993ae1d15cf6e47d6f2449862be82
+        tag: 91.0.4472.101-1
+        commit: fa28f00a2b56ef74f7a9b06a16926e140fb97ae6
 
   - name: chromium
     buildsystem: simple
@@ -187,66 +186,27 @@ modules:
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
-      - mkdir -p out/Release
-      - cp /app/ugc/flags.gn out/Release/args.gn
-      - >-
-        echo '
-        use_sysroot=false
-        custom_toolchain="//build/toolchain/linux/unbundle:default"
-        host_toolchain="//build/toolchain/linux/unbundle:default"
-        use_udev=false
-        use_lld=true
-        enable_nacl=false
-        blink_symbol_level=0
-        use_gnome_keyring=false
-        use_pulseaudio=true
-        clang_use_chrome_plugins=false
-        is_official_build=true
-        treat_warnings_as_errors=false
-        proprietary_codecs=true
-        ffmpeg_branding="Chrome"
-        is_component_ffmpeg=true
-        use_vaapi=true
-        enable_widevine=true
-        chrome_pgo_phase=0
-        rtc_use_pipewire=true
-        rtc_link_pipewire=true
-        rtc_pipewire_version="0.3"
-        enable_hangout_services_extension=true
-        ' >> out/Release/args.gn
-      - tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles
-      - mkdir -p out/ReleaseFree
-      - cp out/Release{,Free}/args.gn
-      - echo -e 'proprietary_codecs = false\nffmpeg_branding = "Chromium"' >> out/ReleaseFree/args.gn
-      - out/Release/gn gen out/Release
-      - out/Release/gn gen out/ReleaseFree
-      - >
-        . /usr/lib/sdk/node12/enable.sh;
-        . /usr/lib/sdk/openjdk11/enable.sh;
-        . /usr/lib/sdk/llvm11/enable.sh;
-        ninja -C out/ReleaseFree -j$FLATPAK_BUILDER_N_JOBS libffmpeg.so;
-        ninja -C out/Release -j$FLATPAK_BUILDER_N_JOBS chrome;
-      - mkdir -p /app/chromium
-      # Keep file names sync with build_devel_flatpak.py
-      - >-
-        cd out/Release && for path in chrome icudtl.dat *.so *.pak *.bin *.png locales MEIPreload swiftshader; do
-          cp -rv $path /app/chromium || true
-        done
-      # Place the proprietary libffmpeg in the extension path, then overwrite it with the free one.
-      - install -Dm 755 out/ReleaseFree/libffmpeg.so /app/chromium/libffmpeg.so
-      - install -Dm 755 out/Release/libffmpeg.so /app/chromium/nonfree-codecs/lib/libffmpeg.so
-      - >-
-        for size in 24 48 64 128 256; do
-          install -Dm 644 chrome/app/theme/chromium/product_logo_$size.png /app/share/icons/hicolor/${size}x${size}/apps/com.github.Eloston.UngoogledChromium.png;
-        done
-      - install -Dm 644 portal_error.txt -t /app/share/flatpak-chromium
-      - install -Dm 644 com.github.Eloston.UngoogledChromium.desktop -t /app/share/applications
-      - install -Dm 644 com.github.Eloston.UngoogledChromium.metainfo.xml -t /app/share/metainfo
-      - install -Dm 755 chromium.sh /app/bin/chromium
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.77.tar.xz
-        sha256: 45d5a43ef798d20313c78fa8a075be0c22055e39c8481eb53eabda81df901b31
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.101.tar.xz
+        sha256: 78146192aaae7771d9130c2828e1081d940da32af3aadcb73578521683307eb4
+      - type: archive
+        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-13-init-6429-g0e92cbd6-2.tgz
+        sha256: 3355d81f43412c1664babdafc2051b9154aaca8d86077829107cc4eae28b018c
+        dest: third_party/llvm-build/Release+Asserts
+        strip-components: 0
+        only-arches: [x86_64]
+        x-checker-data:
+          type: chromium
+          component: llvm-prebuilt
+      - type: git
+        url: https://github.com/llvm/llvm-project
+        commit: llvmorg-13-init-6429-g0e92cbd6
+        dest: third_party/llvm-2
+        only-arches: [aarch64]
+        x-checker-data:
+          type: chromium
+          component: llvm-git
       - type: patch
         paths:
           - patches/0001-ffmpeg-Use-royalty-free-libfdk-aac-for-AAC-playback.patch
@@ -272,9 +232,8 @@ modules:
           - patches/0021-Add-support-for-respecting-system-proxy-settings-whe.patch
           - patches/0022-content-Disable-the-WASM-trap-handler-on-Linux.patch
           - patches/0023-Use-the-host-Java-install-for-Closure.patch
-          - patches/0024-Revert-Reland-build-In-LTO-links-run-just-one-link-a.patch
-          - patches/0025-Revert-base-Rename-SEQUENCE_CHECKER-capability-name.patch
-          - patches/0026-Revert-Reland-Add-clang-nomerge-attribute-to-CheckEr.patch
+          - patches/0024-Clang-build-script-Allow-passing-a-prebuilt-Clang-fo.patch
+          - patches/0025-build-Remove-arm64-tool-prefix.patch
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
@@ -283,3 +242,5 @@ modules:
         path: chromium.sh
       - type: file
         path: portal_error.txt
+      - type: dir
+        path: build-aux
