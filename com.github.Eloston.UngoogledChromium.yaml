@@ -186,6 +186,9 @@ modules:
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
+      - ./bootstrap.sh
+      - ./build.sh
+      - ./install.sh
     sources:
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.101.tar.xz
