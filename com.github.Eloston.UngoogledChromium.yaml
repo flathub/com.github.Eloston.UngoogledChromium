@@ -169,8 +169,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 91.0.4472.101-1
-        commit: fa28f00a2b56ef74f7a9b06a16926e140fb97ae6
+        tag: 91.0.4472.114-1
+        commit: a9eb6fd87445465a2e1881f7fc6e718fd17db606
 
   - name: chromium
     buildsystem: simple
@@ -191,8 +191,8 @@ modules:
       - ./install.sh
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.101.tar.xz
-        sha256: 78146192aaae7771d9130c2828e1081d940da32af3aadcb73578521683307eb4
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.114.tar.xz
+        sha256: c1c7fe783f3250978503d4bd53144039bd818de8a6e89de493f27dd5168f7e71
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-13-init-6429-g0e92cbd6-2.tgz
         sha256: 3355d81f43412c1664babdafc2051b9154aaca8d86077829107cc4eae28b018c
