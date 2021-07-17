@@ -164,13 +164,11 @@ modules:
     buildsystem: simple
     build-commands:
       - 'cp -r $PWD /app/ugc'
-    cleanup:
-      - '*'
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 91.0.4472.114-1
-        commit: a9eb6fd87445465a2e1881f7fc6e718fd17db606
+        tag: 91.0.4472.164-1
+        commit: 19a576e5d9f9a2f508eebd588fc588f8ab16eae1
 
   - name: chromium
     buildsystem: simple
@@ -189,10 +187,11 @@ modules:
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
+      - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.114.tar.xz
-        sha256: c1c7fe783f3250978503d4bd53144039bd818de8a6e89de493f27dd5168f7e71
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-91.0.4472.164.tar.xz
+        sha256: 84e56fa2ad96d910cab429c513eeaca7bfa94096fef057bd024be826ce8426bd
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-13-init-6429-g0e92cbd6-2.tgz
         sha256: 3355d81f43412c1664babdafc2051b9154aaca8d86077829107cc4eae28b018c
