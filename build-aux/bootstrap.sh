@@ -14,7 +14,6 @@ mkdir -p out/Release
 cp /app/ugc/flags.gn out/Release/args.gn
 cat >> out/Release/args.gn <<-EOF
 	use_sysroot=false
-	use_udev=false
 	use_lld=true
 	enable_nacl=false
 	blink_symbol_level=0
