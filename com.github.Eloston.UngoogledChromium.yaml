@@ -77,9 +77,6 @@ modules:
         url: https://github.com/OpenPrinting/cups.git
         tag: v2.3.3op2
         commit: 3b566f73587ffa8ad9690f2399efc4508b3a9016
-        x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)
 
   - name: gtk-cups-backend
     buildsystem: meson
@@ -157,9 +154,6 @@ modules:
         url: https://github.com/refi64/flextop
         tag: v2021.07.1
         commit: 9f66dac84388f520ecab5ac4fa60df6343b7db5b
-        x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
 
   - name: cobalt
     buildsystem: meson
@@ -225,17 +219,11 @@ modules:
         dest: third_party/llvm-build/Release+Asserts
         strip-components: 0
         only-arches: [x86_64]
-        x-checker-data:
-          type: chromium
-          component: llvm-prebuilt
       - type: git
         url: https://github.com/llvm/llvm-project
         commit: llvmorg-13-init-15163-g98033fdc
         dest: third_party/llvm-2
         only-arches: [aarch64]
-        x-checker-data:
-          type: chromium
-          component: llvm-git
       - patches/all.json
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
