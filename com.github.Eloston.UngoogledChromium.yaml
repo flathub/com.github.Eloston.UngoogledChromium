@@ -181,6 +181,32 @@ modules:
         done
       - touch /app/chromium/extensions/no-mount-stamp
 
+  - name: materialicons
+    buildsystem: simple
+    build-commands:
+      - mkdir --parents /app/share/fonts/
+      - install -D MaterialIcons-Regular.ttf /app/share/fonts/
+      - install -D MaterialIconsOutlined-Regular.otf /app/share/fonts/
+      - install -D MaterialIconsRound-Regular.otf /app/share/fonts/
+      - install -D MaterialIconsSharp-Regular.otf /app/share/fonts/
+      - install -D MaterialIconsTwoTone-Regular.otf /app/share/fonts/
+    sources:
+      - type: file
+        url: https://github.com/google/material-design-icons/raw/63c5cb306073a9ecdfd3579f0f696746ab6305f6/font/MaterialIcons-Regular.ttf
+        sha256: bc66ff963b638caf6fdeb18428a75e55bd329f4aac1d50249d3345e0531d58f3
+      - type: file
+        url: https://github.com/google/material-design-icons/raw/63c5cb306073a9ecdfd3579f0f696746ab6305f6/font/MaterialIconsOutlined-Regular.otf
+        sha256: c4c7d7823d40389a503560cb38ea551b7c4f10b2c34213ad4d4cf9d26df8c535
+      - type: file
+        url: https://github.com/google/material-design-icons/raw/63c5cb306073a9ecdfd3579f0f696746ab6305f6/font/MaterialIconsRound-Regular.otf
+        sha256: aa907a9819ec2685305dd8f7bd1c5b3aa2fccf29e9611ce315f58862c154c4c3
+      - type: file
+        url: https://github.com/google/material-design-icons/raw/63c5cb306073a9ecdfd3579f0f696746ab6305f6/font/MaterialIconsSharp-Regular.otf
+        sha256: 1245f4bedb406ff0e4feb27301c74317ad0ca1af7484be3e743bf7194bb12851
+      - type: file
+        url: https://github.com/google/material-design-icons/raw/63c5cb306073a9ecdfd3579f0f696746ab6305f6/font/MaterialIconsTwoTone-Regular.otf
+        sha256: e95c9886710408075d6fd14f522b5d242349ef04504369251a24b4f72198284d
+
   - name: ungoogled-chromium
     buildsystem: simple
     build-commands:
