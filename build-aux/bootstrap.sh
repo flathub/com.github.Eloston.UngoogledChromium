@@ -31,6 +31,7 @@ cat >> out/Release/args.gn <<-EOF
 	rtc_link_pipewire=true
 	rtc_pipewire_version="0.3"
 	enable_hangout_services_extension=true
+	disable_fieldtrial_testing_config=true
 EOF
 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$FLATPAK_BUILDER_N_JOBS
 mkdir -p out/ReleaseFree
