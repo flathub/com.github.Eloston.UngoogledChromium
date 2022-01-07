@@ -6,7 +6,6 @@ command: chromium
 finish-args:
   - --require-version=1.8.2
   - --filesystem=home
-  - --filesystem=xdg-run/pipewire-0
   - --filesystem=/run/.heim_org.h5l.kcm-socket
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
@@ -19,9 +18,11 @@ finish-args:
   - --socket=wayland
   - --system-talk-name=org.freedesktop.Avahi
   - --system-talk-name=org.freedesktop.UPower
+  - --talk-name=com.canonical.AppMenu.Registrar
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.freedesktop.secrets
+  - --talk-name=org.kde.kwalletd5
   - --talk-name=org.gnome.SessionManager
   - --own-name=org.mpris.MediaPlayer2.chromium.*
   - --persist=.pki
