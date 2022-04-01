@@ -135,8 +135,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 99.0.4844.84-1
-        commit: 6428e2a835f7410f8ea734a03abfa35470710001
+        tag: 100.0.4896.60-1
+        commit: 926435025113180f45c12a76beb25ab9b0b3a823
 
   - name: chromium
     buildsystem: simple
@@ -159,11 +159,11 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-99.0.4844.84.tar.xz
-        sha256: 20ec184ed34bdc7e660ccf6c007b2db37007de423b3a5a51698a96aa29527515
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-100.0.4896.60.tar.xz
+        sha256: 0e5ea5f3061ad090cf6bd57ca037496d95ea8956de021aff902f7d0ded7bffdc
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-14-init-12719-gc4b45eeb-3.tgz
-        sha256: f691d2e11a83cd9beed85f6792d16b9688a2dbd7e57eb9b5b6d12565f44d403f
+        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-15-init-1995-g5bec1ea7-1.tgz
+        sha256: c2ccf8e5136661eb7c25bb08ae6e78f7d667b03f0c16dabf2eb1a392b244bd5f
         dest: third_party/llvm-build/Release+Asserts
         strip-components: 0
         only-arches: [x86_64]
@@ -173,7 +173,7 @@ modules:
         only-arches: [aarch64]
       - type: git
         url: https://github.com/llvm/llvm-project
-        commit: llvmorg-14-init-12719-gc4b45eeb
+        commit: llvmorg-15-init-1995-g5bec1ea7
         dest: third_party/llvm
         only-arches: [aarch64]
       - patches/all.json
