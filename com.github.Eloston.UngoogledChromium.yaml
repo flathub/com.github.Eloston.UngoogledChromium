@@ -135,8 +135,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/Eloston/ungoogled-chromium
-        tag: 103.0.5060.114-1
-        commit: e228bcdcca0a86ad18531acbeead4fd47ef8a1bb
+        tag: 103.0.5060.114-2
+        commit: 441693013e31600fc39f36296dd205a386b1b89f
 
   - name: chromium
     buildsystem: simple
