@@ -134,7 +134,7 @@ modules:
       - cp -r $PWD /app/ugc
     sources:
       - type: git
-        url: https://github.com/Eloston/ungoogled-chromium
+        url: https://github.com/ungoogled-software/ungoogled-chromium
         tag: 103.0.5060.114-2
         commit: 441693013e31600fc39f36296dd205a386b1b89f
 
