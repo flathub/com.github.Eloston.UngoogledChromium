@@ -138,6 +138,16 @@ modules:
         tag: 106.0.5249.119-1
         commit: 674f97ce79e140828e003834207df80452cc90c4
 
+  - name: ungoogled-chromium-arch
+    buildsystem: simple
+    build-commands:
+      - cp -r $PWD /app/ugc-arch
+    sources:
+      - type: git
+        url: https://github.com/ungoogled-software/ungoogled-chromium-archlinux
+        tag: 106.0.5249.119-2
+        commit: 3c9f52d2ed63d64e4768069a9be73ffe43589b9a
+
   - name: chromium
     buildsystem: simple
     build-options:
@@ -149,6 +159,7 @@ modules:
         CFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
         CXXFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
     build-commands:
+      - ./apply-arch-patches.sh
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
@@ -156,7 +167,7 @@ modules:
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
-      - rm -rf /app/ugc
+      - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-106.0.5249.119.tar.xz
