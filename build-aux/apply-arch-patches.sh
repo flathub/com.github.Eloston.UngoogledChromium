@@ -1,10 +1,5 @@
 #!/bin/bash -ex
 
-# Use the --oauth2-client-id= and --oauth2-client-secret= switches for
-# setting GOOGLE_DEFAULT_CLIENT_ID and GOOGLE_DEFAULT_CLIENT_SECRET at
-# runtime -- this allows signing into Chromium without baked-in values
-patch -Np1 -i /app/ugc-arch/use-oauth2-client-switches-as-default.patch
-
 # Revert kGlobalMediaControlsCastStartStop enabled by default
 # https://crbug.com/1314342
 patch -Rp1 -F3 -i /app/ugc-arch/REVERT-enable-GlobalMediaControlsCastStartStop.patch
