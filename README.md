@@ -1,27 +1,73 @@
 # ungoogled-chromium flatpak
 
-## How do I install Widevine CDM?
+### Extension points
+
+To avoid having to expose more of the host filesystem in the sandbox but still
+allowing extending Chromium, the following extension points are defined:
+- com.github.Eloston.UngoogledChromium.Policy
+- com.github.Eloston.UngoogledChromium.Extension
+- com.github.Eloston.UngoogledChromium.NativeMessagingHost
+
+#### com.github.Eloston.UngoogledChromium.Policy
+
+This extension point can be used to configure custom Chromium policies and is
+currently on version '1' and will make any policy under the `policies/managed` and
+`policies/recommended` subdirectories available to Chromium.
+
+#### com.github.Eloston.UngoogledChromium.Extension
+
+Similarly to the above, but for Chromium extensions, this extension point is
+also currently on version '1' and will make any extension under the `extensions`
+subdirectory available to Chromium.
+
+#### com.github.Eloston.UngoogledChromium.NativeMessagingHost
+
+Also as above, but for [native messaging host](https://developer.chrome.com/docs/apps/nativeMessaging/)
+support. As the other extension points, this extension point is also currently
+on version '1' and exposes the `native-messaging-hosts` subdirectory to Chromium.
+
+#### Using extension points
+
+Extension points can be provided as regular flatpaks and an example is provided
+under `examples/policies/block-dinosaur-game`. Important to note that extension points'
+name must follow the syntax of `<ExtensionPointName>.<id>`, where `<ExtensionPointName>`
+is one of the supported extension points above and `<id>` is a generic id for this
+specific extension point.
+
+Flatpak also supports “unmanaged extensions”, allowing loading extensions installed
+into `/var/lib/flatpak/extension` and `$XDG_DATA_HOME/flatpak/extension`.
+This can be useful for example to allow system administrators to expose system installed
+policies, extensions, etc.
+
+One example of such "unmanaged extension" could be an extension point that exposes
+all system policies installed under `/etc/chromium-browser/policies/{managed,recommended}`.
+This could be done for example by creating an extension point under
+`/var/lib/flatpak/extension/com.github.Eloston.UngoogledChromium.Policy.system-policies`, with
+`/var/lib/flatpak/extension/com.github.Eloston.UngoogledChromium.Policy.system-policies/<arch>/<version>`
+being a symlink to `/etc/chromium-browser`. Note that `<version>` must match the
+extension point version.
+
+Also important to note that in the example above one would not be able to symlink the
+actual policy file directly, as otherwise flatpak would not be able to resolve the
+symlink when bind mounting the extension point.
+
+### How do I install Widevine CDM?
 	
 1. Download and execute [widevine-install.sh](https://github.com/flathub/com.github.Eloston.UngoogledChromium/raw/master/widevine-install.sh)
 2. Restart the browser
 
-## How do I fix the spell checker?
+### Miscellaneous Issues
 
-1. Go to https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries/+/master
-2. Find a bdic you want, click on it. You will see a mostly empty page aside from “X-byte binary file”
-3. On the bottom right corner, click “txt”. For en-US-9-0.bdic, you will get a link https://chromium.googlesource.com/chromium/deps/hunspell_dictionaries/+/master/en-US-9-0.bdic?format=TEXT
-4. This is a base64-encoded file that needs to be decoded.
-5. Now, simply run `base64 -d en-US-9-0.bdic > ~/.var/app/com.github.Eloston.UngoogledChromium/config/chromium/Dictionaries/en-US-9-0.bdic` (assuming you want the dictionary to be in the default profile)
-6. Toggle spell check in `chrome://settings/languages`, or restart the browser for the dictionaries to take effect.
+For other problems please check https://ungoogled-software.github.io/ungoogled-chromium-wiki/faq
+before creating an issue in this repository. However keep in mind the following while
+reading any document about Ungoogled Chromium:
 
-## How to force enable dark theme?
+* `~/.config/chromium` -> `~/.var/app/com.github.Eloston.UngoogledChromium/config/chromium`
 
-1. Create or add to the file `~/.var/app/com.github.Eloston.UngoogledChromium/config/chromium-flags.conf`
-2. It should contain the following: 
+`~/.config/chromium` is not accessible to Ungoogled Chromium and the above path should be used
+instead.
 
-```
---force-dark-mode
---enable-features=WebUIDarkMode
-```
-
-### For other problems please visit https://ungoogled-software.github.io/ungoogled-chromium-wiki/faq
+Also keep in mind that after making a change, make sure to do a `flatpak kill com.github.Eloston.UngoogledChromium`
+to ensure that Ungoogled Chromium was actually restarted. This is because by default, Chromium
+runs in the background after being started for the first time (closing the window doesn't actually
+exit Chromium, just keeps it in a sort of "standby" mode).
