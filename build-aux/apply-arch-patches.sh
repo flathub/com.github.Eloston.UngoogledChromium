@@ -18,6 +18,3 @@ patch -Np1 -i /app/ugc-arch/wayland-egl.patch
 
 # VAAPI wayland support (https://github.com/ungoogled-software/ungoogled-chromium-archlinux/issues/161)
 patch -Np1 -i /app/ugc-arch/ozone-add-va-api-support-to-wayland.patch
-
-# Remove HEVC profile limits
-patch -Np1 -i /app/ugc-arch/remove-main-main10-profile-limit.patch
