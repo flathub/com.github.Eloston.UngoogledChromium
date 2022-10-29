@@ -135,8 +135,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        tag: 107.0.5304.68-1
-        commit: 684f95cb2ad0ecf25bd42b906d0ac98b24af4f28
+        tag: 107.0.5304.87-1
+        commit: 2abe047d2360c4f0b232a4c2a181e7c9f107994a
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -145,8 +145,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium-archlinux
-        tag: 107.0.5304.68-1
-        commit: fd3024d365217eb3f8080cad99eabd360d39ccee
+        tag: 107.0.5304.87-1
+        commit: 2d8c3bf51be776a85c4e9ab417469810c07968cc
 
   - name: chromium
     buildsystem: simple
@@ -170,8 +170,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-107.0.5304.68.tar.xz
-        sha256: aac4f19b2e12e3ec3fd8179de26b306a4e209ec2a39b24e9e04fcce057cdb84c
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-107.0.5304.87.tar.xz
+        sha256: 6c0e00c186e22a1be29177ea410ba40ff0bf65f3ded67a345eb5b17f76c93c59
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-4609-g025a5b22-2.tgz
         sha256: bbcf6a3456cb6d8648a6bb15fca27bcb77902318090d2eee6cbc9472acc0ef69
