@@ -135,8 +135,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        tag: 107.0.5304.87-1
-        commit: 2abe047d2360c4f0b232a4c2a181e7c9f107994a
+        tag: 107.0.5304.110-1
+        commit: f9d460038269ac0243ee72d7e300355fa972a24b
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -145,8 +145,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium-archlinux
-        tag: 107.0.5304.87-1
-        commit: 2d8c3bf51be776a85c4e9ab417469810c07968cc
+        tag: 107.0.5304.110-1
+        commit: c4c7736f1ae4740e4c1f9f0e5217a259b52b38fa
 
   - name: chromium
     buildsystem: simple
