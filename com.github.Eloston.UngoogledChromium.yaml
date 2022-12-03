@@ -135,7 +135,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 352a8844b01a05a786ba76da599d106487f1533f
+        commit: cd7f60509b5173ad47c23d059e2fb80849c7d244
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -144,7 +144,7 @@ modules:
     sources:
       - type: git
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: cb51d84cbb346219eff6178cea94e0e6eb9f1af1
+        commit: c86bab1a33b82f141d43e9604d7dd34070907075
 
   - name: chromium
     buildsystem: simple
@@ -168,8 +168,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.71.tar.xz
-        sha256: cb6ca080c492ede34df7bf9c4eca45576e6306865985465bd0319c96bb71ff5d
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.94.tar.xz
+        sha256: 0607518481a8a5b993fb371eec544f7d20e43c2eb706ca7bf40ef584496cb6fe
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-6578-g0d30e92f-2.tgz
         sha256: aa3a115ee2d19eead9bbee92350949c9d931f755b0b433703571e2f2154822b4
