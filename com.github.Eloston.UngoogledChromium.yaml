@@ -135,7 +135,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: cd7f60509b5173ad47c23d059e2fb80849c7d244
+        commit: 9b29104124797c29618863cdec1a1c8d721c8a05
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -168,8 +168,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.94.tar.xz
-        sha256: 0607518481a8a5b993fb371eec544f7d20e43c2eb706ca7bf40ef584496cb6fe
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.98.tar.xz
+        sha256: 60b6137971e3cb2947477f654491ed4f517ab88ea2807fa3b89fcce34b83561e
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-6578-g0d30e92f-2.tgz
         sha256: aa3a115ee2d19eead9bbee92350949c9d931f755b0b433703571e2f2154822b4
