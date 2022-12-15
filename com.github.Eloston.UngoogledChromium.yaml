@@ -1,9 +1,9 @@
 app-id: com.github.Eloston.UngoogledChromium
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 base: org.chromium.Chromium.BaseApp
-base-version: '21.08'
+base-version: '22.08'
 command: chromium
 finish-args:
   - --require-version=1.8.2
@@ -62,31 +62,11 @@ add-extensions:
     autodelete: true
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm13
+  - org.freedesktop.Sdk.Extension.llvm14
   - org.freedesktop.Sdk.Extension.node16
   - org.freedesktop.Sdk.Extension.openjdk11
 
 modules:
-  # Based on https://github.com/flathub/shared-modules/blob/master/python2.7/python-2.7.json
-  - name: python2
-    config-opts:
-      - --enable-shared
-      - --with-ensurepip=yes
-      - --with-system-expat
-      - --with-system-ffi
-      - --with-dbmliborder=gdbm
-      - --enable-unicode=ucs4
-    build-options:
-      no-debuginfo: true
-    post-install:
-      - chmod 644 $FLATPAK_DEST/lib/libpython2.7.so.1.0
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tar.xz
-        sha256: b62c0e7937551d0cc02b8fd5cb0f544f9405bafc9a54d3808ed4594812edef43
-
   - name: readelf-symlink
     only-arches: [aarch64]
     buildsystem: simple
@@ -135,7 +115,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 9b29104124797c29618863cdec1a1c8d721c8a05
+        commit: c3831020e4b5b1bb2f2b49fb394dc43aef7ff899
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -143,8 +123,9 @@ modules:
       - cp -r $PWD /app/ugc-arch
     sources:
       - type: git
+        # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: c86bab1a33b82f141d43e9604d7dd34070907075
+        commit: 802d7be049b92ab381c7ddc2435561522fe292c4
 
   - name: chromium
     buildsystem: simple
@@ -168,8 +149,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.98.tar.xz
-        sha256: 60b6137971e3cb2947477f654491ed4f517ab88ea2807fa3b89fcce34b83561e
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-108.0.5359.124.tar.xz
+        sha256: d48dfac2a61b14a5d7d2f460b09b70ef3ab88e27b82e3173938cb54eaa612a75
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-6578-g0d30e92f-2.tgz
         sha256: aa3a115ee2d19eead9bbee92350949c9d931f755b0b433703571e2f2154822b4
