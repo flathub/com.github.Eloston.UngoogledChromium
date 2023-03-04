@@ -12,6 +12,7 @@ finish-args:
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
   - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
+  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --share=ipc
   - --share=network
   - --socket=cups
