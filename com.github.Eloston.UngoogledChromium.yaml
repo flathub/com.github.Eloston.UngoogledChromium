@@ -116,7 +116,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 5bec0f6894f616bc15e3d8ea1a6d0691fd058ec4
+        commit: ce036275d9d21a8408ef48ee9839b3c21b8448ca
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -126,7 +126,7 @@ modules:
       - type: git
         # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: c08361da01151674953404035d198bd66b4b156b
+        commit: 18a86447739b010041f677d0d27b6c5b18c4d4d7
 
   - name: chromium
     buildsystem: simple
@@ -150,11 +150,11 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-110.0.5481.177.tar.xz
-        sha256: 7b2f454d1195270a39f94a9ff6d8d68126be315e0da4e31c20f4ba9183a1c9b7
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-111.0.5563.64.tar.xz
+        sha256: 7d5ca0e2bdb22a97713e6bfce74c651006d71aa883056c8e2c2a148039fe4074
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-12251-g87d0ff91-2.tgz
-        sha256: 902060c5657cb99e58332ef33eed52262373734abf841a38efac239b9382969c
+        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-16-init-17653-g39da55e8-2.tgz
+        sha256: b4afdf625aa4b72c5d188ed28a13dd352a881a2a4149542f0c903698d0498017
         dest: third_party/llvm-build/Release+Asserts
         strip-components: 0
         only-arches: [x86_64]
@@ -164,7 +164,7 @@ modules:
         only-arches: [aarch64]
       - type: git
         url: https://github.com/llvm/llvm-project
-        commit: llvmorg-16-init-12251-g87d0ff91
+        commit: llvmorg-16-init-17653-g39da55e8
         dest: third_party/llvm
         only-arches: [aarch64]
       - patches/all.json
