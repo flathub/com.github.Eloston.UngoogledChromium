@@ -49,6 +49,7 @@ cat >> out/Release/args.gn <<-EOF
 	use_system_libwayland=false
 	use_system_libffi=true
 	use_qt=false
+	enable_remoting=false
 EOF
 tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j$FLATPAK_BUILDER_N_JOBS
 
