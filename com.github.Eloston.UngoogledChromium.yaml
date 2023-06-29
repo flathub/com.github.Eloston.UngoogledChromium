@@ -118,7 +118,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: c183f9db16807b7ef089e19e6fcfea200d69cc28
+        commit: 939a50695adfc40b9dd8c9eac17a1a9af90e6caf
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -128,7 +128,7 @@ modules:
       - type: git
         # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: f591b5ca1f5b93bfa172c090d624580fa732c442
+        commit: bc19ada796beba0b8f7556797b762a630a8370b0
 
   - name: chromium
     buildsystem: simple
