@@ -132,14 +132,6 @@ modules:
 
   - name: chromium
     buildsystem: simple
-    build-options:
-      env:
-        CC: clang
-        CXX: clang++
-        AR: llvm-ar
-        NM: llvm-nm
-        CFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
-        CXXFLAGS: -Wno-unknown-warning-option -Wno-unknown-pragmas
     build-commands:
       - ./apply-arch-patches.sh
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
