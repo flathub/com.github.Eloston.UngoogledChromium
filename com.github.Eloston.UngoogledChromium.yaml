@@ -12,7 +12,6 @@ finish-args:
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
   - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
-  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --share=ipc
   - --share=network
   - --socket=cups
@@ -31,7 +30,7 @@ finish-args:
   - --talk-name=org.kde.kwalletd5
   - --talk-name=org.gnome.SessionManager
   - --own-name=org.mpris.MediaPlayer2.chromium.*
-  - --persist=.pki
+  - --persist=.pki # https://github.com/flathub/com.github.Eloston.UngoogledChromium/issues/34
 
 add-extensions:
   com.github.Eloston.UngoogledChromium.Codecs:
@@ -114,7 +113,7 @@ modules:
   - name: ungoogled-chromium
     buildsystem: simple
     build-commands:
-      - cp -r $PWD /app/ugc
+      - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
@@ -123,7 +122,7 @@ modules:
   - name: ungoogled-chromium-arch
     buildsystem: simple
     build-commands:
-      - cp -r $PWD /app/ugc-arch
+      - cp -r "${PWD}" /app/ugc-arch
     sources:
       - type: git
         # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
