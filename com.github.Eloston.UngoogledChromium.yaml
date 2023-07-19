@@ -12,7 +12,6 @@ finish-args:
   - --device=all
   - --env=GTK_PATH=/app/lib/gtkmodules
   - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
-  - --env=XCURSOR_PATH=/run/host/user-share/icons:/run/host/share/icons
   - --share=ipc
   - --share=network
   - --socket=cups
@@ -31,7 +30,7 @@ finish-args:
   - --talk-name=org.kde.kwalletd5
   - --talk-name=org.gnome.SessionManager
   - --own-name=org.mpris.MediaPlayer2.chromium.*
-  - --persist=.pki
+  - --persist=.pki # https://github.com/flathub/com.github.Eloston.UngoogledChromium/issues/34
 
 add-extensions:
   com.github.Eloston.UngoogledChromium.Codecs:
@@ -114,21 +113,21 @@ modules:
   - name: ungoogled-chromium
     buildsystem: simple
     build-commands:
-      - cp -r $PWD /app/ugc
+      - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 939a50695adfc40b9dd8c9eac17a1a9af90e6caf
+        commit: 891b80bbfcdb15e8292143efd1715fa3f30662c4
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
     build-commands:
-      - cp -r $PWD /app/ugc-arch
+      - cp -r "${PWD}" /app/ugc-arch
     sources:
       - type: git
         # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: bc19ada796beba0b8f7556797b762a630a8370b0
+        commit: 06df539c617b83864d2b30ce8cfe7ad855e2bc53
 
   - name: chromium
     buildsystem: simple
@@ -138,17 +137,18 @@ modules:
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
         -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
+      - mv third_party/llvm-fp third_party/llvm || true
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-114.0.5735.198.tar.xz
-        sha256: a9f3440feeab51f56b199797b83b458ca545bf67e114c62b21470fadd5a41dea
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-115.0.5790.98.tar.xz
+        sha256: ffbe630ecf8fc8a250be05fdbec6c94d5881b5fcbbc5fb2b93e54ddc78d56af1
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-17-init-8029-g27f27d15-3.tgz
-        sha256: 1ac590c011158940037ce9442d4bf12943dc14a7ddaab6094e75a8750b47b861
+        url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-17-init-10134-g3da83fba-2.tgz
+        sha256: f92738ef0fbbcd641fb22160e8e63b6c0aa76bae800d9d9a972ef14442ed889c
         dest: third_party/llvm-build/Release+Asserts
         strip-components: 0
         only-arches: [x86_64]
@@ -158,8 +158,8 @@ modules:
         only-arches: [aarch64]
       - type: git
         url: https://github.com/llvm/llvm-project
-        commit: llvmorg-17-init-8029-g27f27d15
-        dest: third_party/llvm
+        commit: llvmorg-17-init-10134-g3da83fba
+        dest: third_party/llvm-fp
         only-arches: [aarch64]
       - patches/all.json
       - type: file
