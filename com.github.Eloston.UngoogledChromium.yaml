@@ -137,6 +137,7 @@ modules:
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
         -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
+      - mv third_party/llvm-fp third_party/llvm || true
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
@@ -158,7 +159,7 @@ modules:
       - type: git
         url: https://github.com/llvm/llvm-project
         commit: llvmorg-17-init-10134-g3da83fba
-        dest: third_party/llvm
+        dest: third_party/llvm-fp
         only-arches: [aarch64]
       - patches/all.json
       - type: file
