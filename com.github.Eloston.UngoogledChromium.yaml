@@ -144,8 +144,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-115.0.5790.102.tar.xz
-        sha256: 06f6e0f22b3a0122eaf5b50a8f603648dc37e7b1178b65ef54e93162b386b06b
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-115.0.5790.110.tar.xz
+        sha256: e9d4bcae7bc812afc430188b48cdc86ab31c4a6d161c34a770b8d56d3121f771
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-17-init-10134-g3da83fba-2.tgz
         sha256: f92738ef0fbbcd641fb22160e8e63b6c0aa76bae800d9d9a972ef14442ed889c
