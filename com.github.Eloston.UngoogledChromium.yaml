@@ -117,7 +117,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 69d64bc0bfe423a8bccf8b53d7f55d39b3b39cd1
+        commit: a5572e8621d1952954fbed7c25c9a5a66e57ab2c
 
   - name: ungoogled-chromium-arch
     buildsystem: simple
@@ -127,7 +127,7 @@ modules:
       - type: git
         # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
         url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: 06df539c617b83864d2b30ce8cfe7ad855e2bc53
+        commit: ff4513e1af5be8b73cb8ccaefed6e8455559d45c
 
   - name: chromium
     buildsystem: simple
@@ -144,8 +144,8 @@ modules:
       - rm -rf /app/ugc /app/ugc-arch
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-115.0.5790.102.tar.xz
-        sha256: 06f6e0f22b3a0122eaf5b50a8f603648dc37e7b1178b65ef54e93162b386b06b
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-115.0.5790.110.tar.xz
+        sha256: e9d4bcae7bc812afc430188b48cdc86ab31c4a6d161c34a770b8d56d3121f771
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-17-init-10134-g3da83fba-2.tgz
         sha256: f92738ef0fbbcd641fb22160e8e63b6c0aa76bae800d9d9a972ef14442ed889c
