@@ -116,23 +116,12 @@ modules:
       - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
-        url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 862de97bb72980a8dc07c47c04d86ac658793e11
-
-  - name: ungoogled-chromium-arch
-    buildsystem: simple
-    build-commands:
-      - cp -r "${PWD}" /app/ugc-arch
-    sources:
-      - type: git
-        # https://aur.archlinux.org/cgit/aur.git/log/?h=chromium-wayland-vaapi
-        url: https://aur.archlinux.org/chromium-wayland-vaapi.git
-        commit: ff4513e1af5be8b73cb8ccaefed6e8455559d45c
+        url: https://github.com/Ahrotahn/ungoogled-chromium
+        commit: 123dff1a52442c68efbdbcacc9f932bdf25a57ea
 
   - name: chromium
     buildsystem: simple
     build-commands:
-      - ./apply-arch-patches.sh
       - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
       - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
       - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
@@ -141,7 +130,7 @@ modules:
       - ./bootstrap.sh
       - ./build.sh
       - ./install.sh
-      - rm -rf /app/ugc /app/ugc-arch
+      - rm -rf /app/ugc
     sources:
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-116.0.5845.96.tar.xz
