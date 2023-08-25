@@ -116,8 +116,8 @@ modules:
       - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
-        url: https://github.com/Ahrotahn/ungoogled-chromium
-        commit: 123dff1a52442c68efbdbcacc9f932bdf25a57ea
+        url: https://github.com/ungoogled-software/ungoogled-chromium
+        commit: 21e4a63a088d6f60c9a8d330b02896fa927bacee
 
   - name: chromium
     buildsystem: simple
