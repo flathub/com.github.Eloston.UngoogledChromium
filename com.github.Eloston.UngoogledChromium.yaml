@@ -116,8 +116,8 @@ modules:
       - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
-        url: https://github.com/Ahrotahn/ungoogled-chromium
-        commit: 123dff1a52442c68efbdbcacc9f932bdf25a57ea
+        url: https://github.com/ungoogled-software/ungoogled-chromium
+        commit: 21e4a63a088d6f60c9a8d330b02896fa927bacee
 
   - name: chromium
     buildsystem: simple
@@ -133,8 +133,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-116.0.5845.96.tar.xz
-        sha256: 1ec1052a959abced9642b36482549bc2ebefa428ed136289d8e0c54b4ccd1c81
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-116.0.5845.110.tar.xz
+        sha256: e85ef479a1a4972ffd4d2e389cbaf341df4c7cca63e4ebbb38d175fda106d9a9
       - type: archive
         url: https://commondatastorage.googleapis.com/chromium-browser-clang/Linux_x64/clang-llvmorg-17-init-12166-g7586aeab-3.tgz
         sha256: a3c744bef3e76c985b51f55f2c864f9bd10ac777b88a65a31d6cd85b6dda816b
