@@ -31,7 +31,6 @@ cat >> out/Release/args.gn <<-EOF
 	use_sysroot=false
 	use_lld=true
 	blink_symbol_level=0
-	use_gnome_keyring=false
 	use_pulseaudio=true
 	is_official_build=true
 	proprietary_codecs=true
