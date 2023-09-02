@@ -31,7 +31,6 @@ cat >> out/Release/args.gn <<-EOF
 	use_sysroot=false
 	use_lld=true
 	blink_symbol_level=0
-	use_gnome_keyring=false
 	use_pulseaudio=true
 	is_official_build=true
 	proprietary_codecs=true
@@ -51,6 +50,5 @@ tools/gn/bootstrap/bootstrap.py --skip-generate-buildfiles -j"${FLATPAK_BUILDER_
 mkdir -p out/ReleaseFree
 cp out/Release{,Free}/args.gn
 echo -e 'proprietary_codecs = false\nffmpeg_branding = "Chromium"' >> out/ReleaseFree/args.gn
-echo -e 'enable_mse_mpeg2ts_stream_parser=false' >> out/ReleaseFree/args.gn
 out/Release/gn gen out/Release
 out/Release/gn gen out/ReleaseFree
