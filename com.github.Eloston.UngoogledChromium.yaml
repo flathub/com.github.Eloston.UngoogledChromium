@@ -150,7 +150,8 @@ modules:
         commit: llvmorg-18-init-1174-g2532b68f
         dest: third_party/llvm-fp
         only-arches: [aarch64]
-      - patches/all.json
+      - patches/chromium/_sources.json
+      - patches/ffmpeg/_sources.json
       - type: file
         path: com.github.Eloston.UngoogledChromium.desktop
       - type: file
