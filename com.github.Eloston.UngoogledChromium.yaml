@@ -117,7 +117,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: c97db8a19733d35526485708cdd48967f904a2a7
+        commit: 23a4715b118527bfd8e20a7c6f81cf1313e29190
 
   - name: chromium
     buildsystem: simple
