@@ -1,16 +1,15 @@
 app-id: com.github.Eloston.UngoogledChromium
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 base: org.chromium.Chromium.BaseApp
-base-version: '22.08'
+base-version: '23.08'
 command: chromium
 finish-args:
   - --require-version=1.8.2
   - --filesystem=home
   - --filesystem=/run/.heim_org.h5l.kcm-socket
   - --device=all
-  - --env=GTK_PATH=/app/lib/gtkmodules
   - --env=LD_LIBRARY_PATH=/app/chromium/nonfree-codecs/lib
   - --share=ipc
   - --share=network
@@ -64,9 +63,9 @@ add-extensions:
     autodelete: true
 
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.llvm14
-  - org.freedesktop.Sdk.Extension.node16
-  - org.freedesktop.Sdk.Extension.openjdk11
+  - org.freedesktop.Sdk.Extension.llvm17
+  - org.freedesktop.Sdk.Extension.node18
+  - org.freedesktop.Sdk.Extension.openjdk21
 
 modules:
   - name: readelf-symlink
