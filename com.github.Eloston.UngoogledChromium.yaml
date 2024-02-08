@@ -115,9 +115,15 @@ modules:
     build-commands:
       - cp -r "${PWD}" /app/ugc
     sources:
-      - type: git
-        url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: 7057489ec2da3014ac89e7fe43933280902bf155
+      - type: archive
+        url: https://github.com/ungoogled-software/ungoogled-chromium/archive/refs/tags/121.0.6167.160-1.tar.gz
+        sha256: ac6b04003f23f3aabb08b478eb9b3eb7d79b518dc632f48d1f24dc38d5d3eba7
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/ungoogled-software/ungoogled-chromium/releases/latest
+          version-query: .tag_name
+          url-query: https://github.com/ungoogled-software/ungoogled-chromium/archive/refs/tags/$version.tar.gz
+          timestamp-query: .published_at
 
   - name: chromium
     buildsystem: simple
@@ -133,8 +139,8 @@ modules:
       - rm -rf /app/ugc
     sources:
       - type: archive
-        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-121.0.6167.139.tar.xz
-        sha256: e12cc967bef7a79630828792f02d95297a06eb905c98e4c6e065fd5e74d6f9ff
+        url: https://commondatastorage.googleapis.com/chromium-browser-official/chromium-121.0.6167.160.tar.xz
+        sha256: 4586673899383d30e9d95fa3a9c5f8160f32a9d5789e40be82abf3e4dd9cc3df
         x-checker-data:
           type: chromium
           component: chromium
