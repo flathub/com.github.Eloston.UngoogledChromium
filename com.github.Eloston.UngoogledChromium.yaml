@@ -118,8 +118,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium-flatpak
-        tag: 123.0.6312.105-1
-        commit: da58890fe3dfad2a2e3d509453807a101c3ff783
+        tag: 123.0.6312.122-1
+        commit: 60333d5be310dd8ce6c68e94b85938efa0a8e3b0
         x-checker-data:
           type: git
           tag-pattern: '^\d+\.\d+\.\d+\.\d+-\d+$'
