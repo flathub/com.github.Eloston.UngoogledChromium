@@ -3,14 +3,15 @@
 For more information about the ungoogled-chromium flatpak, please check the [official repository](
     https://github.com/ungoogled-software/ungoogled-chromium-flatpak) on GitHub.
 
-## Package Renaming Notice
+## URGENT PLEASE READ THIS
 
-This package was previously [`com.github.Eloston.UngoogledChromium`](https://github.com/flathub/com.github.Eloston.UngoogledChromium),
-but was renamed to [`io.github.ungoogled_software.ungoogled_chromium`](https://github.com/flathub/io.github.ungoogled_software.ungoogled_chromium).
+Update to the new package name `io.github.ungoogled_software.ungoogled_chromium` as the old package name `com.github.Eloston.UngoogledChromium` will be deprecated soon. You could do that without losing your data by running `flatpak update` and accepting this prompt:
 
-If you are using the old package, you will be promoted to move to the
-new package when doing a `flatpak update`. Your files will be
-migrated automatically, so you won't lose any browser data, but you might need to migrate your flatpak overrides manually if you have any.
+```
+Info: app com.github.Eloston.UngoogledChromium branch stable is end-of-life, in
+favor of io.github.ungoogled_software.ungoogled_chromium branch stable
+Replace? [Y/n]:
+```
 
 The reason for the migration was to reflect the move of the project
 from [Eloston](https://github.com/Eloston)'s personal GitHub account to the [ungoogled-software organization](https://github.com/ungoogled-software) and to verify the flatpak.
