@@ -1,6 +1,8 @@
 #!/bin/bash -ex
 
-alias fix-app-id="sed -e 's|io.github.ungoogled_software.ungoogled_chromium|com.github.Eloston.UngoogledChromium|g'"
+fix-app-id() {
+	sed -e 's|io.github.ungoogled_software.ungoogled_chromium|com.github.Eloston.UngoogledChromium|g' "${@}"
+}
 
 mkdir -p /app/chromium
 
