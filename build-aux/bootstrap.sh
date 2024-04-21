@@ -26,7 +26,7 @@ fi
 
 # (TODO: enable use_qt in the future?)
 mkdir -p out/Release
-cp /app/ugc/flags.gn out/Release/args.gn
+cp /app/ugc/src/flags.gn out/Release/args.gn
 cat >> out/Release/args.gn <<-EOF
 	use_sysroot=false
 	use_lld=true

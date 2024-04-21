@@ -117,16 +117,20 @@ modules:
       - cp -r "${PWD}" /app/ugc
     sources:
       - type: git
-        url: https://github.com/ungoogled-software/ungoogled-chromium
-        commit: c5aa0f6af86237b10f1264b6d9e82df4db0aa5ae
+        url: https://github.com/ungoogled-software/ungoogled-chromium-flatpak
+        tag: 123.0.6312.105-1
+        commit: da58890fe3dfad2a2e3d509453807a101c3ff783
+        x-checker-data:
+          type: git
+          tag-pattern: '^\d+\.\d+\.\d+\.\d+-\d+$'
 
   - name: chromium
     buildsystem: simple
     build-commands:
-      - /app/ugc/utils/prune_binaries.py ./ /app/ugc/pruning.list
-      - /app/ugc/utils/patches.py apply ./ /app/ugc/patches
-      - /app/ugc/utils/domain_substitution.py apply -r /app/ugc/domain_regex.list
-        -f /app/ugc/domain_substitution.list -c ./domsubcache.tar.gz ./
+      - /app/ugc/src/utils/prune_binaries.py ./ /app/ugc/src/pruning.list
+      - /app/ugc/src/utils/patches.py apply ./ /app/ugc/src/patches
+      - /app/ugc/src/utils/domain_substitution.py apply -r /app/ugc/src/domain_regex.list
+        -f /app/ugc/src/domain_substitution.list -c ./domsubcache.tar.gz ./
       - mv third_party/llvm-fp third_party/llvm || true
       - ./bootstrap.sh
       - ./build.sh
@@ -163,10 +167,6 @@ modules:
           component: llvm-git
       - patches/chromium/_sources.json
       - patches/ffmpeg/_sources.json
-      - type: file
-        path: com.github.Eloston.UngoogledChromium.desktop
-      - type: file
-        path: com.github.Eloston.UngoogledChromium.metainfo.xml
       - type: file
         path: chromium.sh
       - type: file
