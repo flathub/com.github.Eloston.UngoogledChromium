@@ -1,4 +1,5 @@
 {
+  "disable-external-data-checker": true,
   "end-of-life": "The application has been renamed to io.github.ungoogled_software.ungoogled_chromium",
   "end-of-life-rebase": "io.github.ungoogled_software.ungoogled_chromium",
   "skip-icons-check": true
