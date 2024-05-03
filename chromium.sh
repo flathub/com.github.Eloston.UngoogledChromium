@@ -19,5 +19,4 @@ if [[ ! -f /app/chromium/extensions/no-mount-stamp ]]; then
   merge_extensions policies/recommended
 fi
 
-export LIBGL_DRIVERS_PATH=/usr/lib/$(uname -m)-linux-gnu/GL/lib/dri
 exec cobalt "$@"
