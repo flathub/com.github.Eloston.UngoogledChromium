@@ -125,7 +125,7 @@ modules:
         commit: 1416ea6a89ade2118c009c30082e0201f20ab929
         x-checker-data:
           type: git
-          tag-pattern: '^\d+\.\d+\.\d+\.\d+-\d+$'
+          tag-pattern: ^\d+\.\d+\.\d+\.\d+-\d+$
 
   - name: chromium
     buildsystem: simple
