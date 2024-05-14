@@ -121,8 +121,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/ungoogled-software/ungoogled-chromium-flatpak
-        tag: 124.0.6367.201-1
-        commit: a4baf91531cefa6f922c62c662f8e82bf40fafa7
+        tag: 124.0.6367.207-1
+        commit: e0f6a54be32eee2e13bef30089090934bc46acbd
         x-checker-data:
           type: git
           tag-pattern: ^\d+\.\d+\.\d+\.\d+-\d+$
