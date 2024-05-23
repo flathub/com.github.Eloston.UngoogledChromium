@@ -1,17 +1,23 @@
-# ungoogled-chromium flatpak
+# URGENT PLEASE READ THIS
 
-For more information about the ungoogled-chromium flatpak, please check the [official repository](
-    https://github.com/ungoogled-software/ungoogled-chromium-flatpak) on GitHub.
+## YOU WILL NOT LOSE YOUR DATA BY UPDATING.
 
-## URGENT PLEASE READ THIS
+You **MUST** update to the new package name <code><small>io.github.ungoogled_software.ungoogled_chromium</small></code> to keep using Ungoogled Chromium.
 
-Update to the new package name `io.github.ungoogled_software.ungoogled_chromium` as the old package name `com.github.Eloston.UngoogledChromium` will be deprecated soon. You could do that without losing your data by running `flatpak update` and accepting this prompt:
+The old package name `com.github.Eloston.UngoogledChromium` is no longer supported and will only display this message from now on.
+
+To update, run the following command in your terminal:
 
 ```
-Info: app com.github.Eloston.UngoogledChromium branch stable is end-of-life, in
-favor of io.github.ungoogled_software.ungoogled_chromium branch stable
-Replace? [Y/n]:
+$ flatpak update -y com.github.Eloston.UngoogledChromium
+Looking for updates…
+
+Info: app com.github.Eloston.UngoogledChromium branch stable is end-of-life, in favor of io.github.ungoogled_software.ungoogled_chromium branch stable
+Updating to rebased version
+
+...
+
+Changes complete.
 ```
 
-The reason for the migration was to reflect the move of the project
-from [Eloston](https://github.com/Eloston)'s personal GitHub account to the [ungoogled-software organization](https://github.com/ungoogled-software) and to verify the flatpak.
+If you need any assistance or have any questions, feel free to ask in the Ungoogled Chromium Matrix room at <a href='https://matrix.to/#/#ungoogled-chromium:matrix.org'>#ungoogled-chromium:matrix.org</a> or the <a href='https://github.com/ungoogled-software/ungoogled-chromium-flatpak/issues'>GitHub issue tracker</a>.
