@@ -1,8 +1,8 @@
 # URGENT PLEASE READ THIS
 
-## YOU WILL NOT LOSE YOUR DATA BY UPDATING.
+## YOU WILL NOT LOSE YOUR DATA BY UPDATING
 
-You **MUST** update to the new package name <code><small>io.github.ungoogled_software.ungoogled_chromium</small></code> to keep using Ungoogled Chromium.
+You **MUST** update to the new package name `io.github.ungoogled_software.ungoogled_chromium` to keep using Ungoogled Chromium.
 
 The old package name `com.github.Eloston.UngoogledChromium` is no longer supported and will only display this message from now on.
 
